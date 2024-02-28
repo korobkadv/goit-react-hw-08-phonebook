@@ -18,7 +18,14 @@ export const AppBar = () => {
       boxShadow="base"
     >
       <Box p="4">
-        <Heading size="lg">Phonebook</Heading>
+        <Heading
+          size="lg"
+          color="#e3710e"
+          textDecoration="underline"
+          textShadow="2px 1px #2C5364"
+        >
+          Phonebook
+        </Heading>
       </Box>
 
       <Box p="4">
