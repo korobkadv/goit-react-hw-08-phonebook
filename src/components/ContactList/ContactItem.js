@@ -1,16 +1,21 @@
 import { useDispatch } from 'react-redux';
 import { deleteContact } from '../../redux/contacts/operations';
-import { ContactsItem, Button } from './ContactItem.styled';
+import { ListItem, Button } from '@chakra-ui/react';
 
 export const ContactItem = ({ contact }) => {
   const dispatch = useDispatch();
 
   return (
-    <ContactsItem>
-      {contact.name}: {contact.phone}
-      <Button onClick={() => dispatch(deleteContact(contact.id))}>
+    <ListItem mt="4">
+      <b>{contact.name}</b>: {contact.number}
+      <Button
+        size="xs"
+        ml="2"
+        colorScheme="yellow"
+        onClick={() => dispatch(deleteContact(contact.id))}
+      >
         Delete
       </Button>
-    </ContactsItem>
+    </ListItem>
   );
 };

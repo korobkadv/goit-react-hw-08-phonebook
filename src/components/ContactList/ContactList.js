@@ -1,8 +1,8 @@
 import { useSelector } from 'react-redux';
 import { visibleContacts } from '../../redux/contacts/selectors';
-
-import { Contacts } from './ContactList.styled';
 import { ContactItem } from './ContactItem';
+
+import { UnorderedList } from '@chakra-ui/react';
 
 export const ContactList = () => {
   const visibleContact = useSelector(visibleContacts);
@@ -10,11 +10,11 @@ export const ContactList = () => {
   return (
     <>
       {visibleContact.length ? (
-        <Contacts>
+        <UnorderedList mt="4">
           {visibleContact.map(contact => (
             <ContactItem key={contact.id} contact={contact} />
           ))}
-        </Contacts>
+        </UnorderedList>
       ) : (
         <p>No contacts according to your search!</p>
       )}

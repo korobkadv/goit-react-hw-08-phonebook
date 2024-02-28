@@ -1,14 +1,18 @@
 import { useDispatch } from 'react-redux';
-import { Formik } from 'formik';
+import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import { logIn } from '../../redux/auth/operations';
+
 import {
-  Form,
+  Box,
   Button,
-  FormGroup,
-  Field,
-  ErrorMessage,
-} from './LoginForm.styled';
+  FormControl,
+  FormLabel,
+  Input,
+  FormErrorMessage,
+  VStack,
+  Heading,
+} from '@chakra-ui/react';
 
 const contactsSchema = Yup.object().shape({
   email: Yup.string()
@@ -32,22 +36,53 @@ export const LoginForm = () => {
         actions.resetForm();
       }}
     >
-      <Form>
-        <FormGroup>
-          Email
-          <Field name="email" type="email" />
-          <ErrorMessage name="email" component="span" />
-        </FormGroup>
-        <FormGroup>
-          Password
-          <Field name="password" type="password" />
-          <ErrorMessage name="password" component="span" />
-        </FormGroup>
-
-        <Button type="submit" name="login">
-          Log In
-        </Button>
-      </Form>
+      <Box padding="4" w="100%">
+        <Form>
+          <VStack
+            spacing="4"
+            p="5"
+            bg="white"
+            align="stretch"
+            w="350px"
+            ml="auto"
+            mr="auto"
+            borderRadius="5"
+          >
+            <Heading size="md">Log In:</Heading>
+            <Field name="email">
+              {({ field, form }) => (
+                <FormControl
+                  isInvalid={form.errors.email && form.touched.email}
+                >
+                  <FormLabel htmlFor="email" fontSize="">
+                    Email
+                  </FormLabel>
+                  <Input {...field} id="email" type="email" size="sm" />
+                  <FormErrorMessage color="red">
+                    {form.errors.email}
+                  </FormErrorMessage>
+                </FormControl>
+              )}
+            </Field>
+            <Field name="password">
+              {({ field, form }) => (
+                <FormControl
+                  isInvalid={form.errors.password && form.touched.password}
+                >
+                  <FormLabel htmlFor="password">Password</FormLabel>
+                  <Input {...field} id="password" type="password" size="sm" />
+                  <FormErrorMessage color="red">
+                    {form.errors.password}
+                  </FormErrorMessage>
+                </FormControl>
+              )}
+            </Field>
+            <Button colorScheme="teal" type="submit">
+              Log In
+            </Button>
+          </VStack>
+        </Form>
+      </Box>
     </Formik>
   );
 };

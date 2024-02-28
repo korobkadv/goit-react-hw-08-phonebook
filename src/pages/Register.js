@@ -1,14 +1,13 @@
 import { Helmet } from 'react-helmet-async';
-import { RegisterWrapper } from './Register.styled';
 import { RegisterForm } from '../components/RegisterForm/RegisterForm';
 
 export default function Register() {
   return (
-    <RegisterWrapper>
+    <div>
       <Helmet>
         <title>Phonebook - Register</title>
       </Helmet>
       <RegisterForm />
-    </RegisterWrapper>
+    </div>
   );
 }

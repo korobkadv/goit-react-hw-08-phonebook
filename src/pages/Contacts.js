@@ -13,7 +13,7 @@ import { ContactForm } from '../components/ContactForm/ContactForm';
 import { ContactList } from '../components/ContactList/ContactList';
 import { Filter } from '../components/Filter/Filter';
 
-import { Wrapper, SectionWrapper } from './Contacts.styled';
+import { Flex, Box, Heading } from '@chakra-ui/react';
 
 export default function Contacts() {
   const dispatch = useDispatch();
@@ -27,19 +27,29 @@ export default function Contacts() {
   }, [dispatch]);
 
   return (
-    <Wrapper>
+    <Flex alignItems="flex-start" justifyContent="center">
       <Helmet>
         <title>Phonebook - Contacts list</title>
       </Helmet>
-      <SectionWrapper>
-        <Section title="Add contact">
+      <div>
+        <Section>
           <ContactForm />
         </Section>
-      </SectionWrapper>
+      </div>
 
-      <SectionWrapper>
+      <Box
+        spacing="4"
+        p="5"
+        m="5"
+        bg="white"
+        align="stretch"
+        w="350px"
+        borderRadius="5"
+        boxShadow="base"
+      >
+        <Heading size="md">Contacts:</Heading>
         {contacts.length ? (
-          <Section title="Contacts">
+          <Section>
             <Filter />
             <ContactList />
           </Section>
@@ -47,7 +57,7 @@ export default function Contacts() {
           <p>No contacts...</p>
         )}
         {isLoading && !error && <Loader />}
-      </SectionWrapper>
-    </Wrapper>
+      </Box>
+    </Flex>
   );
 }

@@ -1,14 +1,17 @@
 import { useDispatch } from 'react-redux';
 import { addContact } from '../../redux/contacts/operations';
-import { Formik } from 'formik';
+import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
+
 import {
-  Form,
   Button,
-  FormGroup,
-  Field,
-  ErrorMessage,
-} from './ContactForm.styled';
+  FormControl,
+  FormLabel,
+  Input,
+  FormErrorMessage,
+  VStack,
+  Heading,
+} from '@chakra-ui/react';
 
 const contactsSchema = Yup.object().shape({
   name: Yup.string().min(3, 'Too Short!').required('Must not be empty'),
@@ -34,20 +37,48 @@ export const ContactForm = () => {
       }}
     >
       <Form>
-        <FormGroup>
-          Name
-          <Field name="name" />
-          <ErrorMessage name="name" component="span" />
-        </FormGroup>
-        <FormGroup>
-          Number
-          <Field name="number" />
-          <ErrorMessage name="number" component="span" />
-        </FormGroup>
-
-        <Button type="submit" name="add">
-          Add contact
-        </Button>
+        <VStack
+          spacing="4"
+          p="5"
+          m="5"
+          bg="white"
+          align="stretch"
+          w="350px"
+          borderRadius="5"
+        >
+          <Heading size="md">Add contact:</Heading>
+          <Field name="name">
+            {({ field, form }) => (
+              <FormControl isInvalid={form.errors.name && form.touched.name}>
+                <FormLabel htmlFor="name" fontSize="">
+                  Username
+                </FormLabel>
+                <Input {...field} id="name" type="text" size="sm" />
+                <FormErrorMessage color="red">
+                  {form.errors.name}
+                </FormErrorMessage>
+              </FormControl>
+            )}
+          </Field>
+          <Field name="number">
+            {({ field, form }) => (
+              <FormControl
+                isInvalid={form.errors.number && form.touched.number}
+              >
+                <FormLabel htmlFor="number" fontSize="">
+                  Number
+                </FormLabel>
+                <Input {...field} id="number" type="text" size="sm" />
+                <FormErrorMessage color="red">
+                  {form.errors.number}
+                </FormErrorMessage>
+              </FormControl>
+            )}
+          </Field>
+          <Button colorScheme="teal" type="submit" size="sm">
+            Add contact
+          </Button>
+        </VStack>
       </Form>
     </Formik>
   );
