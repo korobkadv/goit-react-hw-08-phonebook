@@ -11,7 +11,10 @@ import {
   FormErrorMessage,
   VStack,
   Heading,
+  InputGroup,
+  InputLeftElement,
 } from '@chakra-ui/react';
+import { EditIcon, PhoneIcon } from '@chakra-ui/icons';
 
 const contactsSchema = Yup.object().shape({
   name: Yup.string().min(3, 'Too Short!').required('Must not be empty'),
@@ -53,7 +56,13 @@ export const ContactForm = () => {
                 <FormLabel htmlFor="name" fontSize="">
                   Username
                 </FormLabel>
-                <Input {...field} id="name" type="text" size="sm" />
+                <InputGroup>
+                  <InputLeftElement pointerEvents="none">
+                    <EditIcon color="gray.300" mb="2" />
+                  </InputLeftElement>
+                  <Input {...field} id="name" type="text" size="sm" />
+                </InputGroup>
+
                 <FormErrorMessage color="red">
                   {form.errors.name}
                 </FormErrorMessage>
@@ -68,7 +77,12 @@ export const ContactForm = () => {
                 <FormLabel htmlFor="number" fontSize="">
                   Number
                 </FormLabel>
-                <Input {...field} id="number" type="text" size="sm" />
+                <InputGroup>
+                  <InputLeftElement pointerEvents="none">
+                    <PhoneIcon color="gray.300" mb="2" />
+                  </InputLeftElement>
+                  <Input {...field} id="number" type="text" size="sm" />
+                </InputGroup>
                 <FormErrorMessage color="red">
                   {form.errors.number}
                 </FormErrorMessage>

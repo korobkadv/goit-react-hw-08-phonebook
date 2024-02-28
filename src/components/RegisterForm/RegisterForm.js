@@ -12,7 +12,10 @@ import {
   FormErrorMessage,
   VStack,
   Heading,
+  InputGroup,
+  InputLeftElement,
 } from '@chakra-ui/react';
+import { AtSignIcon, EditIcon, LockIcon } from '@chakra-ui/icons';
 
 const contactsSchema = Yup.object().shape({
   name: Yup.string().min(3, 'Too Short!').required('Must not be empty'),
@@ -60,7 +63,12 @@ export const RegisterForm = () => {
                   <FormLabel htmlFor="name" fontSize="">
                     Username
                   </FormLabel>
-                  <Input {...field} id="name" type="text" size="sm" />
+                  <InputGroup>
+                    <InputLeftElement pointerEvents="none">
+                      <EditIcon color="gray.300" mb="2" />
+                    </InputLeftElement>
+                    <Input {...field} id="name" type="text" size="sm" />
+                  </InputGroup>
                   <FormErrorMessage color="red">
                     {form.errors.name}
                   </FormErrorMessage>
@@ -76,7 +84,12 @@ export const RegisterForm = () => {
                   <FormLabel htmlFor="email" fontSize="">
                     Email
                   </FormLabel>
-                  <Input {...field} id="email" type="email" size="sm" />
+                  <InputGroup>
+                    <InputLeftElement pointerEvents="none">
+                      <AtSignIcon color="gray.300" mb="2" />
+                    </InputLeftElement>
+                    <Input {...field} id="email" type="email" size="sm" />
+                  </InputGroup>
                   <FormErrorMessage color="red">
                     {form.errors.email}
                   </FormErrorMessage>
@@ -90,7 +103,12 @@ export const RegisterForm = () => {
                   isInvalid={form.errors.password && form.touched.password}
                 >
                   <FormLabel htmlFor="password">Password</FormLabel>
-                  <Input {...field} id="password" type="password" size="sm" />
+                  <InputGroup>
+                    <InputLeftElement pointerEvents="none">
+                      <LockIcon color="gray.300" mb="2" />
+                    </InputLeftElement>
+                    <Input {...field} id="password" type="password" size="sm" />
+                  </InputGroup>
                   <FormErrorMessage color="red">
                     {form.errors.password}
                   </FormErrorMessage>

@@ -12,7 +12,10 @@ import {
   FormErrorMessage,
   VStack,
   Heading,
+  InputGroup,
+  InputLeftElement,
 } from '@chakra-ui/react';
+import { AtSignIcon, LockIcon } from '@chakra-ui/icons';
 
 const contactsSchema = Yup.object().shape({
   email: Yup.string()
@@ -57,7 +60,12 @@ export const LoginForm = () => {
                   <FormLabel htmlFor="email" fontSize="">
                     Email
                   </FormLabel>
-                  <Input {...field} id="email" type="email" size="sm" />
+                  <InputGroup>
+                    <InputLeftElement pointerEvents="none">
+                      <AtSignIcon color="gray.300" mb="2" />
+                    </InputLeftElement>
+                    <Input {...field} id="email" type="email" size="sm" />
+                  </InputGroup>
                   <FormErrorMessage color="red">
                     {form.errors.email}
                   </FormErrorMessage>
@@ -70,7 +78,13 @@ export const LoginForm = () => {
                   isInvalid={form.errors.password && form.touched.password}
                 >
                   <FormLabel htmlFor="password">Password</FormLabel>
-                  <Input {...field} id="password" type="password" size="sm" />
+                  <InputGroup>
+                    <InputLeftElement pointerEvents="none">
+                      <LockIcon color="gray.300" mb="2" />
+                    </InputLeftElement>
+                    <Input {...field} id="password" type="password" size="sm" />
+                  </InputGroup>
+
                   <FormErrorMessage color="red">
                     {form.errors.password}
                   </FormErrorMessage>
